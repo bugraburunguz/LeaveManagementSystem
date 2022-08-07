@@ -1,8 +1,8 @@
 package com.bugraburunguz.leavemanagementservice.validation.impl;
 
-import com.bugraburunguz.leavemanagementservice.dto.UserDto;
-import com.bugraburunguz.leavemanagementservice.entity.UserEntity;
-import com.bugraburunguz.leavemanagementservice.repository.UserRepository;
+import com.bugraburunguz.leavemanagementservice.dto.UserAdminDto;
+import com.bugraburunguz.leavemanagementservice.entity.UserAdminEntity;
+import com.bugraburunguz.leavemanagementservice.repository.UserAdminRepository;
 import com.bugraburunguz.leavemanagementservice.validation.UserAdminService;
 import com.bugraburunguz.leavemanagementservice.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -18,24 +18,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserAdminAdminServiceImpl implements UserAdminService {
 
-    private final UserRepository userRepository;
+    private final UserAdminRepository userAdminRepository;
 
     @Override
-    public UserDto save(UserDto userDto) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setFirstName(userDto.getFirstName());
-        userEntity.setLastName(userDto.getLastName());
-        userEntity.setRole(userDto.getRole());
-        userEntity.setDateOfRecruitment(userDto.getDateOfRecruitment());
-        int dateOfLeave = DateUtil.calculateRightOfLeavesDay(userEntity.getDateOfRecruitment());
-        userEntity.setRightOfLeave(dateOfLeave);
-        userRepository.save(userEntity);
-        return userDto;
+    public UserAdminDto save(UserAdminDto userAdminDto) {
+        UserAdminEntity userAdminEntity = new UserAdminEntity();
+        userAdminEntity.setFirstName(userAdminDto.getFirstName());
+        userAdminEntity.setLastName(userAdminDto.getLastName());
+        userAdminEntity.setRole(userAdminDto.getRole());
+        userAdminEntity.setDateOfRecruitment(userAdminDto.getDateOfRecruitment());
+        int dateOfLeave = DateUtil.calculateRightOfLeavesDay(userAdminEntity.getDateOfRecruitment());
+        userAdminEntity.setRightOfLeave(dateOfLeave);
+        userAdminRepository.save(userAdminEntity);
+        return userAdminDto;
     }
 
     @Override
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        userAdminRepository.deleteById(id);
     }
 
     @Override
@@ -44,25 +44,25 @@ public class UserAdminAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    public List<UserDto> findAll() {
-        List<UserEntity> userListRepository = userRepository.findAll();
-        List<UserDto> userDtos = new ArrayList<>();
+    public List<UserAdminDto> findAll() {
+        List<UserAdminEntity> userListRepository = userAdminRepository.findAll();
+        List<UserAdminDto> userAdminDtos = new ArrayList<>();
         userListRepository.forEach(it -> {
-            UserDto userDto = new UserDto();
-            userDto.setId(it.getId());
-            userDto.setFirstName(it.getFirstName());
-            userDto.setLastName(it.getLastName());
-            userDto.setRole(it.getRole());
-            userDto.setDateOfRecruitment(it.getDateOfRecruitment());
-            userDto.setRightOfLeave(it.getRightOfLeave());
+            UserAdminDto userAdminDto = new UserAdminDto();
+            userAdminDto.setId(it.getId());
+            userAdminDto.setFirstName(it.getFirstName());
+            userAdminDto.setLastName(it.getLastName());
+            userAdminDto.setRole(it.getRole());
+            userAdminDto.setDateOfRecruitment(it.getDateOfRecruitment());
+            userAdminDto.setRightOfLeave(it.getRightOfLeave());
 
-            userDtos.add(userDto);
+            userAdminDtos.add(userAdminDto);
         });
-        return userDtos;
+        return userAdminDtos;
     }
 
     @Override
-    public Page<UserDto> findAll(Pageable pageable) {
+    public Page<UserAdminDto> findAll(Pageable pageable) {
         return null;
     }
 }

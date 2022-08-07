@@ -4,7 +4,7 @@ import com.bugraburunguz.leavemanagementservice.dto.UserDto;
 import com.bugraburunguz.leavemanagementservice.entity.UserEntity;
 import com.bugraburunguz.leavemanagementservice.repository.UserRepository;
 import com.bugraburunguz.leavemanagementservice.validation.UserAdminService;
-import com.bugraburunguz.util.DateUtil;
+import com.bugraburunguz.leavemanagementservice.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

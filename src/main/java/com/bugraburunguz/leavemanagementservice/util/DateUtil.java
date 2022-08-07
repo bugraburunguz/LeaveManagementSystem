@@ -1,4 +1,4 @@
-package com.bugraburunguz.util;
+package com.bugraburunguz.leavemanagementservice.util;
 
 
 import lombok.AccessLevel;

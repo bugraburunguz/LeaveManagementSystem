@@ -1,8 +1,8 @@
 package com.bugraburunguz.leavemanagementservice.repository;
 
-import com.bugraburunguz.leavemanagementservice.entity.UserEntity;
+import com.bugraburunguz.leavemanagementservice.entity.LeaveEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserAdminRepository extends JpaRepository<UserEntity, Long> {
+public interface ApplyLeaveRepository extends JpaRepository<LeaveEntity, Long> {
     void deleteById(Long id);
 }

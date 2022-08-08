@@ -1,6 +1,6 @@
 package com.bugraburunguz.leavemanagementservice.controller;
 
-import com.bugraburunguz.leavemanagementservice.dto.UserAdminDto;
+import com.bugraburunguz.leavemanagementservice.dto.UserDto;
 import com.bugraburunguz.leavemanagementservice.validation.UserAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,8 +21,8 @@ public class UserAdminController {
 
     @PostMapping
     @ApiOperation(value = "Adding Employee Method")
-    public ResponseEntity<UserAdminDto> create(@RequestBody UserAdminDto userAdminDto) {
-        return ResponseEntity.ok(userAdminService.save(userAdminDto));
+    public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok(userAdminService.create(userDto));
     }
     @DeleteMapping(value = "/deletePost/{id}")
     @ApiOperation(value = "Adding Employee Method")
@@ -32,7 +32,7 @@ public class UserAdminController {
     }
     @GetMapping
     @ApiOperation(value = "Listing Employee Method")
-    public ResponseEntity<List<UserAdminDto>> listAllUser() {
+    public ResponseEntity<List<UserDto>> listAllUser() {
         return ResponseEntity.ok(userAdminService.findAll());
     }
 }

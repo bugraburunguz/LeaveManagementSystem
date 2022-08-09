@@ -1,7 +1,8 @@
 # LeaveManagementSystem
 
 Bu projede kullanılan teknolojiler
-Java 1.8
+
+- Java 1.8
 - Spring Boot
 - Hibernate
 - PostgreSQL:

@@ -40,6 +40,7 @@ public class ApplyAdminServiceImpl implements ApplyLeaveService {
         leaveEntity.setStartDate(leaveRequest.getStartDate());
         leaveEntity.setEndDate(leaveRequest.getEndDate());
         leaveEntity.setLeaveStatus(leaveRequest.getLeaveStatus());
+        leaveEntity.setLeaveReason(leaveRequest.getLeaveReason());
         leaveEntity.setUser(userEntity);
         leaveEntity.setDuration(DateUtil.toLeaveDuration(leaveRequest.getStartDate(), leaveRequest.getEndDate()));
         userEntity.setRightOfLeaveDay(userEntity.getRightOfLeaveDay() - leaveEntity.getDuration());

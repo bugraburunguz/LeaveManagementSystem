@@ -4,5 +4,4 @@ public enum LeaveStatus {
     HOLD,
     ACTIVE,
     REJECT
-
 }

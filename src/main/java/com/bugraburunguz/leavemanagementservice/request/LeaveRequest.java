@@ -18,5 +18,4 @@ public class LeaveRequest implements Serializable {
     private LocalDate endDate;
 
     private Long userId;
-
 }

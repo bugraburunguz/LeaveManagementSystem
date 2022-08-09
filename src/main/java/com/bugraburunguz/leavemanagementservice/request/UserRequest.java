@@ -16,9 +16,4 @@ public class UserRequest implements Serializable {
     private String role;
 
     private LocalDate dateOfRecruitment;
-
-    public static UserRequest builder() {
-        return new UserRequest();
-    }
-
 }

@@ -7,8 +7,6 @@ import com.bugraburunguz.leavemanagementservice.response.UserResponse;
 import com.bugraburunguz.leavemanagementservice.util.DateUtil;
 import com.bugraburunguz.leavemanagementservice.validation.UserAdminService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,9 +23,9 @@ public class UserAdminServiceImpl implements UserAdminService {
 
         UserEntity userEntity = new UserEntity();
         UserEntity userEntity1 = populateUserEntity(userRequest, userEntity);
-        UserEntity lastSavedBanner = userAdminRepository.save(userEntity1);
+        UserEntity lastSavedUser = userAdminRepository.save(userEntity1);
         userAdminRepository.save(userEntity);
-        return lastSavedBanner.getId();
+        return lastSavedUser.getId();
     }
 
     private UserEntity populateUserEntity(UserRequest userRequest, UserEntity userEntity) {
@@ -52,7 +50,6 @@ public class UserAdminServiceImpl implements UserAdminService {
         userAdminRepository.save(userEntity);
     }
 
-
     @Override
     public List<UserResponse> findAll() {
         List<UserEntity> userListRepository = userAdminRepository.findAll();
@@ -69,10 +66,5 @@ public class UserAdminServiceImpl implements UserAdminService {
             userResponseList.add(userResponse);
         });
         return userResponseList;
-    }
-
-    @Override
-    public Page<UserResponse> findAll(Pageable pageable) {
-        return null;
     }
 }

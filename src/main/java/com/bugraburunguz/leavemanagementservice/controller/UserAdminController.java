@@ -41,7 +41,7 @@ public class UserAdminController {
 
     @ApiOperation(value = "Update Employee Method")
     @PutMapping("/{userId}")
-    public ResponseEntity<HttpStatus> updateBanner(@PathVariable final Long userId,
+    public ResponseEntity<HttpStatus> udateUser(@PathVariable final Long userId,
                                                    @RequestBody final UserRequest userRequest) {
         userAdminService.update(userRequest, userId);
         return new ResponseEntity<>(HttpStatus.OK);

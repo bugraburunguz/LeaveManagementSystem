@@ -11,7 +11,7 @@ public class LeaveResponse implements Serializable {
 
     private Long id;
 
-    private LeaveStatus leaveStatus=LeaveStatus.HOLD;
+    private LeaveStatus leaveStatus;
 
     private String leaveReason;
 
@@ -22,5 +22,4 @@ public class LeaveResponse implements Serializable {
     private Long duration;
 
     private Long userId;
-
 }

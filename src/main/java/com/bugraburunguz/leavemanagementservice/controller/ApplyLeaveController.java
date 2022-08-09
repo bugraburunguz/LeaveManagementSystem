@@ -1,7 +1,6 @@
 package com.bugraburunguz.leavemanagementservice.controller;
 
 import com.bugraburunguz.leavemanagementservice.request.LeaveRequest;
-import com.bugraburunguz.leavemanagementservice.request.UserRequest;
 import com.bugraburunguz.leavemanagementservice.validation.ApplyLeaveService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,8 +39,8 @@ public class ApplyLeaveController {
 
     @ApiOperation(value = "Update Leave Method")
     @PutMapping("/{leaveId}")
-    public ResponseEntity<HttpStatus> updateBanner(@PathVariable final Long leaveId,
-                                                   @RequestBody final LeaveRequest leaveRequest) {
+    public ResponseEntity<HttpStatus> updateUser(@PathVariable final Long leaveId,
+                                                 @RequestBody final LeaveRequest leaveRequest) {
         applyLeaveService.update(leaveRequest, leaveId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

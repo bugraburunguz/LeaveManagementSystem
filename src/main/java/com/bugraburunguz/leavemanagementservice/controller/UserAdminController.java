@@ -1,6 +1,7 @@
 package com.bugraburunguz.leavemanagementservice.controller;
 
-import com.bugraburunguz.leavemanagementservice.dto.UserDto;
+import com.bugraburunguz.leavemanagementservice.request.UserRequest;
+import com.bugraburunguz.leavemanagementservice.response.UserResponse;
 import com.bugraburunguz.leavemanagementservice.validation.UserAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,18 +22,28 @@ public class UserAdminController {
 
     @PostMapping
     @ApiOperation(value = "Adding Employee Method")
-    public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userAdminService.create(userDto));
+    public ResponseEntity<Long> create(@RequestBody UserRequest userRequest) throws Exception {
+        return ResponseEntity.ok(userAdminService.create(userRequest));
     }
+
     @DeleteMapping(value = "/deletePost/{id}")
-    @ApiOperation(value = "Adding Employee Method")
+    @ApiOperation(value = "Deleting Employee Method")
     public ResponseEntity<Long> delete(@RequestBody Long id) {
         userAdminService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @GetMapping
     @ApiOperation(value = "Listing Employee Method")
-    public ResponseEntity<List<UserDto>> listAllUser() {
+    public ResponseEntity<List<UserResponse>> listAllUser() {
         return ResponseEntity.ok(userAdminService.findAll());
+    }
+
+    @ApiOperation(value = "Update Employee Method")
+    @PutMapping("/{userId}")
+    public ResponseEntity<HttpStatus> updateBanner(@PathVariable final Long userId,
+                                                   @RequestBody final UserRequest userRequest) {
+        userAdminService.update(userRequest, userId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

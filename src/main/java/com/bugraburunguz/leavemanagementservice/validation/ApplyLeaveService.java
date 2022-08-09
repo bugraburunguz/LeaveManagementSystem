@@ -1,21 +1,21 @@
 package com.bugraburunguz.leavemanagementservice.validation;
 
-import com.bugraburunguz.leavemanagementservice.dto.LeaveDto;
-import com.bugraburunguz.leavemanagementservice.dto.UserDto;
+import com.bugraburunguz.leavemanagementservice.request.LeaveRequest;
+import com.bugraburunguz.leavemanagementservice.response.LeaveResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface ApplyLeaveService {
-    LeaveDto create(LeaveDto leaveDto);
+    Long create(LeaveRequest leaveRequest);
 
     void delete(Long id);
 
-    void update(Long id);
+    void update(LeaveRequest leaveRequest, Long leaveId);
 
-    List<UserDto> findAll();
+    List<LeaveResponse> findAll();
 
-    Page<UserDto> findAll(Pageable pageable);
+    Page<LeaveResponse> findAll(Pageable pageable);
 
 }

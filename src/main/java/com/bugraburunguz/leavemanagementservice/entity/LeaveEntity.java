@@ -1,5 +1,6 @@
 package com.bugraburunguz.leavemanagementservice.entity;
 
+import com.bugraburunguz.leavemanagementservice.enums.LeaveStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "user_info")
+@Table(name = "leave_info")
 public class LeaveEntity {
 
     @SequenceGenerator(name = "seq_user_info", allocationSize = 1)
@@ -21,7 +22,8 @@ public class LeaveEntity {
     private Long id;
 
     @Column
-    private String leaveStatus;
+    @Enumerated(value = EnumType.ORDINAL)
+    private LeaveStatus leaveStatus = LeaveStatus.HOLD;
 
     @Column
     private String leaveReason;
@@ -32,7 +34,10 @@ public class LeaveEntity {
     @Column
     private LocalDate endDate;
 
+    @Column
+    private Long duration;
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_info_id")
-    private UserEntity userId;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

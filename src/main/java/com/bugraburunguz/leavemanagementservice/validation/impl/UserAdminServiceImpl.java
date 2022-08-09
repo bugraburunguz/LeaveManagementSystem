@@ -1,10 +1,10 @@
 package com.bugraburunguz.leavemanagementservice.validation.impl;
 
-import com.bugraburunguz.leavemanagementservice.dto.UserDto;
-import com.bugraburunguz.leavemanagementservice.entity.LeaveEntity;
 import com.bugraburunguz.leavemanagementservice.entity.UserEntity;
-import com.bugraburunguz.leavemanagementservice.repository.ApplyLeaveRepository;
 import com.bugraburunguz.leavemanagementservice.repository.UserAdminRepository;
+import com.bugraburunguz.leavemanagementservice.request.UserRequest;
+import com.bugraburunguz.leavemanagementservice.response.UserResponse;
+import com.bugraburunguz.leavemanagementservice.util.DateUtil;
 import com.bugraburunguz.leavemanagementservice.validation.UserAdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,40 +13,31 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 
 @Service
 @RequiredArgsConstructor
 public class UserAdminServiceImpl implements UserAdminService {
 
     private final UserAdminRepository userAdminRepository;
-    private final ApplyLeaveRepository applyLeaveRepository;
 
     @Override
-    public UserDto create(UserDto userDto) {
+    public Long create(UserRequest userRequest) {
+
         UserEntity userEntity = new UserEntity();
-        userEntity.setLeaveValuesId(getLeaveValues());
-        userEntity.setFirstName(userDto.getFirstName());
-        userEntity.setLastName(userDto.getLastName());
-        userEntity.setRole(userDto.getRole());
-        userEntity.setDateOfRecruitment(userDto.getDateOfRecruitment());
+        UserEntity userEntity1 = populateUserEntity(userRequest, userEntity);
+        UserEntity lastSavedBanner = userAdminRepository.save(userEntity1);
         userAdminRepository.save(userEntity);
-        return userDto;
+        return lastSavedBanner.getId();
     }
 
-    private LeaveEntity getLeaveValues() {
-        UserEntity userEntity = new UserEntity();
-        UserDto userDto = new UserDto();
-        Long leaveValueId = Objects.nonNull(userDto.getLeaveValuesId())
-                ? userDto.getLeaveValuesId() : userEntity.getLeaveValuesId().getId();
-        LeaveEntity leaveEntity = null;
-        try {
-            leaveEntity = applyLeaveRepository.findById(leaveValueId).orElseThrow(Exception::new);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return leaveEntity;
+    private UserEntity populateUserEntity(UserRequest userRequest, UserEntity userEntity) {
+
+        userEntity.setFirstName(userRequest.getFirstName());
+        userEntity.setLastName(userRequest.getLastName());
+        userEntity.setRole(userRequest.getRole());
+        userEntity.setDateOfRecruitment(userRequest.getDateOfRecruitment());
+        userEntity.setRightOfLeaveDay(DateUtil.calculateRightOfLeavesDay(userRequest.getDateOfRecruitment()));
+        return userEntity;
     }
 
     @Override
@@ -55,30 +46,33 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    public void update(Long id) {
-
+    public void update(UserRequest userRequest, Long userId) {
+        UserEntity userEntity = userAdminRepository.findById(userId).orElseThrow(RuntimeException::new);
+        populateUserEntity(userRequest, userEntity);
+        userAdminRepository.save(userEntity);
     }
 
+
     @Override
-    public List<UserDto> findAll() {
+    public List<UserResponse> findAll() {
         List<UserEntity> userListRepository = userAdminRepository.findAll();
-        List<UserDto> userDtos = new ArrayList<>();
+        List<UserResponse> userResponseList = new ArrayList<>();
         userListRepository.forEach(it -> {
-            UserDto userDto = new UserDto();
-            userDto.setId(it.getId());
-            userDto.setFirstName(it.getFirstName());
-            userDto.setLastName(it.getLastName());
-            userDto.setRole(it.getRole());
-            userDto.setDateOfRecruitment(it.getDateOfRecruitment());
-            userDto.setLeaveValuesId(it.getLeaveValuesId().getId());
+            UserResponse userResponse = new UserResponse();
+            userResponse.setId(it.getId());
+            userResponse.setFirstName(it.getFirstName());
+            userResponse.setLastName(it.getLastName());
+            userResponse.setRole(it.getRole());
+            userResponse.setRightOfLeaveDay(it.getRightOfLeaveDay());
+            userResponse.setDateOfRecruitment(it.getDateOfRecruitment());
 
-            userDtos.add(userDto);
+            userResponseList.add(userResponse);
         });
-        return userDtos;
+        return userResponseList;
     }
 
     @Override
-    public Page<UserDto> findAll(Pageable pageable) {
+    public Page<UserResponse> findAll(Pageable pageable) {
         return null;
     }
 }

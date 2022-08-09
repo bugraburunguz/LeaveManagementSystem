@@ -1,20 +1,20 @@
 package com.bugraburunguz.leavemanagementservice.validation;
 
-import com.bugraburunguz.leavemanagementservice.dto.UserDto;
-import com.bugraburunguz.leavemanagementservice.entity.UserEntity;
+import com.bugraburunguz.leavemanagementservice.request.UserRequest;
+import com.bugraburunguz.leavemanagementservice.response.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface UserAdminService {
-    UserDto create(UserDto userDto);
+    Long create(UserRequest userRequest) throws Exception;
 
-    public void delete(Long id);
+    void delete(Long id);
 
-    void update(Long id);
+    void update(UserRequest userRequest, Long userId);
 
-    List<UserDto> findAll();
+    List<UserResponse> findAll();
 
-    Page<UserDto> findAll(Pageable pageable);
+    Page<UserResponse> findAll(Pageable pageable);
 }

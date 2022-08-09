@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,7 +35,9 @@ public class UserEntity implements Serializable {
     @Column(nullable = false)
     private LocalDate dateOfRecruitment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "leave_value_id")
-    private LeaveEntity leaveValuesId;
+    @Column
+    private Long rightOfLeaveDay;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<LeaveEntity> leaveValuesIdList = new ArrayList<>();
 }

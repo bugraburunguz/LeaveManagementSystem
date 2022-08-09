@@ -13,6 +13,9 @@ proje içindeki compose dosyası ayağa kaldırılmalı: docker-compose -f docke
 Controller'lar
 <img width="1670" alt="Screen Shot 2022-08-09 at 05 04 10" src="https://user-images.githubusercontent.com/26105483/183549728-5c13e49b-4065-4957-a5e8-7242a88139d7.png">
 
+Fonksiyonlar
+<img width="1584" alt="Screen Shot 2022-08-09 at 05 31 29" src="https://user-images.githubusercontent.com/26105483/183550709-67734935-47ad-4ff6-8f67-19cf6c207c5d.png">
+
 Oluşturulan Kullanıcı
 <img width="1675" alt="Screen Shot 2022-08-09 at 05 04 59" src="https://user-images.githubusercontent.com/26105483/183549648-0e6ff840-0ce8-4ded-b184-169772f3ff45.png">
 

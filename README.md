@@ -6,7 +6,8 @@ Bu projede kullanılan teknolojiler
 - Spring Boot
 - Hibernate
 - PostgreSQL:
-proje içindeki compose dosyası ayağa kaldırılmalı: docker-compose -f docker-compose.yml up -d
+proje içindeki compose dosyası ayağa kaldırılmalı: 
+docker-compose -f docker-compose.yml up -d
 - Swagger
 - IDE: Intellij IDEA
 
